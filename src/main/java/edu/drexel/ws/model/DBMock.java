@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,10 +34,6 @@ import edu.drexel.ws.messages.*;
 
 @Service
 public class DBMock {
-
-    //@Value("classpath:edu/drexel/ws/model/pubs.json") private URL url;
-    //jsonDBResource dbRessource;
-    //ServletContext servletContext;
 
     private HashMap<Integer,PublicationType> pubCache = null;
 
@@ -67,10 +63,9 @@ public class DBMock {
         HashMap<Integer,PublicationType> pubDB = new HashMap<Integer,PublicationType>();
 
         try{
-            //File jsonDB = new File("classpath:edu/drexel/ws/message/pubs.json");
+
             File jsonDB  = new ClassPathResource("pubs.json").getFile();
 
-            //jsonDB = new File(url.toURI());
             List<HashMap<String,Object>> pubList = mapper.readValue(jsonDB, new TypeReference<List<HashMap<String,Object>>>(){});
 
             for( HashMap<String,Object> p : pubList)

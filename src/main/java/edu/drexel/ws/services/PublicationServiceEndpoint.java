@@ -27,35 +27,11 @@ public class PublicationServiceEndpoint {
     @PayloadRoot(localPart = "PublicationRequest", namespace = "http://drexel.edu/ws/messages")
     @ResponsePayload
     public PublicationResponse getPublications(@RequestPayload PublicationRequest pubRequest) {
-        //checkSoapHeaderForSomething(header);
 
-        //Check if getting pubs by ID
+        //Use the publication service POJO to handle reading from the JSON database
 
         return pubService.getPublicationsServiceRouter(pubRequest);
     }
 
 
 }
-
-/*
-@Endpoint
-public class CountryEndpoint {
-    private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
-
-    private DBMock countryRepository;
-
-    @Autowired
-    public CountryEndpoint(CountryRepository countryRepository) {
-        this.countryRepository = countryRepository;
-    }
-
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
-    @ResponsePayload
-    public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
-        GetCountryResponse response = new GetCountryResponse();
-        response.setCountry(countryRepository.findCountry(request.getName()));
-
-        return response;
-    }
-}
-*/
