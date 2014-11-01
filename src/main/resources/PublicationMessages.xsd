@@ -1,0 +1,61 @@
+<!--
+<xs:schema attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://drexel.edu/ws/messages"
+           targetNamespace="http://drexel.edu/ws/messages"
+            >
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:tns="http://drexel.edu/ws/messages"
+               targetNamespace="http://drexel.edu/ws/messages"
+               elementFormDefault="qualified">
+
+    <xs:element name="PublicationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RequestType">
+                    <xs:complexType>
+                        <xs:choice>
+                            <xs:element type="xs:string" name="GetAll"/>
+                            <xs:element type="xs:int" name="GetById"/>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="PublicationType">
+        <xs:sequence>
+            <xs:element type="xs:int" name="Id"/>
+            <xs:element type="xs:string" name="Title"/>
+            <xs:element type="xs:string" name="Cite"/>
+            <xs:element type="xs:anyURI" name="Link"/>
+            <xs:element type="xs:string" name="PubDate"/>
+            <xs:element type="xs:string" name="Abstract"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PublicationErrorType">
+        <xs:sequence>
+            <xs:element type="xs:int" name="Code"/>
+            <xs:element type="xs:string" name="Message"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="PublicationResponse">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="Publications">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Publication" type="tns:PublicationType" maxOccurs="unbounded" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Publication" type="tns:PublicationType"/>
+                <xs:element name="Error" type="tns:PublicationErrorType"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
